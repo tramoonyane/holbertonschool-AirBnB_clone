@@ -1,22 +1,108 @@
 #!/usr/bin/python3
+"""
+Module for BaseModel unittest
+"""
+import os
 import unittest
 from models.base_model import BaseModel
-class testBase_AirBnb(unittest.TestCase):
-    """all test for basemodel"""
+from datetime import datetime
+from time import sleep
 
-    def test_base_to_dict(self):
-        my_model = BaseModel()
-        my_model.name = "My First Model"
-        my_model.my_number = 89
-        my_model_json = my_model.to_dict()
-        my_model_json= ("{'my_number': 89, 'name': 'My First Model', 'updated_at': '2024-02-29 18:24:01.871493', 'id': '', 'created_at': '2024-02-27 18:24:01.871499', '__class__': 'BaseModel'}")
 
-        self.assertEqual(
-            (my_model_json), "{'my_number': 89, 'name': 'My First Model', 'updated_at': '2023-02-20 14:24:01.871493', 'id': '853d2737-0bc7-4dbe-a403-b3934a3de25c', 'created_at': '2023-02-20 14:24:01.871499', '__class__': 'BaseModel'}")
-    def test_assert(self):
-        """all attributes"""
+
+class TestBasemodel(unittest.TestCase):
+    """
+    Unittest for BaseModel
+    """
+
+    def setUp(self):
+        """
+        Setup for temporary file path
+        """
+        try:
+            os.rename("file.json", "tmp.json")
+        except FileNotFoundError:
+            pass
+
+    def tearDown(self):
+        """
+        Tear down for temporary file path
+        """
+        try:
+            os.remove("file.json")
+        except FileNotFoundError:
+            pass
+        try:
+            os.rename("tmp.json", "file.json")
+        except FileNotFoundError:
+            pass
+    def test_init(self):
+        """
+        Test for init
+        """
         my_model = BaseModel()
-        self.assertIsInstance(BaseModel.id, str)
-        self.assertIsInstance(BaseModel.updated_at, str)
-        self.assertIsInstance(BaseModel.created_at, str)
-        self.assertIsInstance(BaseModel.__class__, str)
+
+        self.assertIsNotNone(my_model.id)
+        self.assertIsNotNone(my_model.created_at)
+        self.assertIsNotNone(my_model.updated_at)
+
+    def test_one_save(self):
+        bm = BaseModel()
+        sleep(0.05)
+        first_updated_at = bm.updated_at
+        bm.save()
+        self.assertLess(first_updated_at, bm.updated_at)
+
+    def test_two_saves(self):
+        bm = BaseModel()
+        sleep(0.05)
+        first_updated_at = bm.updated_at
+        bm.save()
+        second_updated_at = bm.updated_at
+        self.assertLess(first_updated_at, second_updated_at)
+        sleep(0.05)
+        bm.save()
+        self.assertLess(second_updated_at, bm.updated_at)
+
+    def test_save_with_arg(self):
+        bm = BaseModel()
+        with self.assertRaises(TypeError):
+            bm.save(None)
+
+    def test_save_updates_file(self):
+        bm = BaseModel()
+        bm.save()
+        bmid = "BaseModel." + bm.id
+        with open("file.json", "r") as f:
+            self.assertIn(bmid, f.read())
+    def test_to_dict(self):
+        """
+        Test for to_dict method
+        """
+        my_model = BaseModel()
+
+        my_model_dict = my_model.to_dict()
+
+        self.assertIsInstance(my_model_dict, dict)
+
+        self.assertEqual(my_model_dict["__class__"], 'BaseModel')
+        self.assertEqual(my_model_dict['id'], my_model.id)
+        self.assertEqual(my_model_dict['created_at'], my_model.created_at.isoformat())
+        self.assertEqual(my_model_dict["updated_at"], my_model.updated_at.isoformat())
+
+
+    def test_str(self):
+        """
+        Test for string representation
+        """
+        my_model = BaseModel()
+
+        self.assertTrue(str(my_model).startswith('[BaseModel]'))
+
+        self.assertIn(my_model.id, str(my_model))
+
+        self.assertIn(str(my_model.__dict__), str(my_model))
+
+
+if __name__ == "__main__":
+    unittest.main()
