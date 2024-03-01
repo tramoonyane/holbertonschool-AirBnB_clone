@@ -1,9 +1,16 @@
 #!/usr/bin/python3
-"""Module for Amenity class"""
+"""
+Module for the Amenity class.
+"""
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """Defines attributes for the Amenity class"""
+    """
+    Represent an amenity.
+
+    Attributes:
+        name (str): The name of the amenity.
+    """
 
     name = ""
