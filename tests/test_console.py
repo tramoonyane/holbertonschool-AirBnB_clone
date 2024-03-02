@@ -92,7 +92,8 @@ class TestHBNBCommand_help(unittest.TestCase):
     def test_help_all(self):
         h = (
             "Print the string representation of all instances or a specific class.\n"
-            "Usage: <User>.all()"
+            "Usage: <User>.all()\n"
+            "                <User>.show()"
         )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
