@@ -78,6 +78,17 @@ class TestHBNBCommand_help(unittest.TestCase):
             expected_output = h.replace('\n', '\n        ')
             self.assertEqual(expected_output, output.getvalue().strip())
 
+    def test_help_destroy(self):
+        h = (
+            "Delete an instance based on the class name and id.\n"
+            "Usage: destroy <class_name> <id>"
+        )
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("help destroy"))
+            # Adjust the expected string to match the indentation of the actual output
+            expected_output = h.replace('\n', '\n        ')
+            self.assertEqual(expected_output, output.getvalue().strip())
+
 
 class TestHBNBCommand_exit(unittest.TestCase):
     """Unittests for testing exiting from the HBNB command interpreter."""
