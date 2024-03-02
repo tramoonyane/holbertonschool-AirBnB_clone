@@ -98,7 +98,8 @@ class TestHBNBCommand_help(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
             # Adjust the expected string to match the indentation of the actual output
-            expected_output = h.replace('\n', '\n        ')
+            lines = h.split('\n')
+            expected_output = '\n'.join("        " + line.lstrip() for line in lines)
             self.assertEqual(expected_output, output.getvalue().strip())
 
 
