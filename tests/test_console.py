@@ -1517,13 +1517,6 @@ class TestConsole(unittest.TestCase):
     def tearDown(self):
         self.console = None
 
-    def test_help_command(self):
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.console.onecmd("help")
-            output = f.getvalue().strip()
-            self.assertTrue("Documented commands
-                             (type help <topic>):" in output)
-
     def test_create_command(self):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("create")
