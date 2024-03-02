@@ -1283,7 +1283,7 @@ class TestHBNBCommand_update(unittest.TestCase):
         self.assertFalse(HBNBCommand().onecmd(testCmd))
         test_dict = storage.all()["Place.{}".format(tId)].__dict__
         self.assertEqual(7.0, test_dict["latitude"])
-        
+
     def test_update_valid_dictionary_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
             HBNBCommand().onecmd("create BaseModel")
