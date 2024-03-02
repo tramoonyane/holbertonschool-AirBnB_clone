@@ -1509,5 +1509,26 @@ class TestHBNBCommand_count(unittest.TestCase):
             self.assertEqual("1", output.getvalue().strip())
 
 
+class TestConsole(unittest.TestCase):
+
+    def setUp(self):
+        self.console = HBNBCommand()
+
+    def tearDown(self):
+        self.console = None
+
+    def test_help_command(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("help")
+            output = f.getvalue().strip()
+            self.assertTrue("Documented commands (type help <topic>):" in output)
+
+    def test_create_command(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.console.onecmd("create")
+            output = f.getvalue().strip()
+            self.assertTrue("** class name missing **" in output)
+
+
 if __name__ == "__main__":
     unittest.main()
