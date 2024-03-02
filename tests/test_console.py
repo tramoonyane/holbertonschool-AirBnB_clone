@@ -1521,7 +1521,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.console.onecmd("help")
             output = f.getvalue().strip()
-            self.assertTrue("Documented commands "
+            self.assertTrue("Documented commands
                              (type help <topic>):" in output)
 
     def test_create_command(self):
