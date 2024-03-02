@@ -94,12 +94,12 @@ class TestHBNBCommand_help(unittest.TestCase):
             "Print the string representation of all instances or a specific class.\n"
             "Usage: <User>.all()\n"
             "               <User>.show()"  # Adjusted indentation
-         )
-         with patch("sys.stdout", new=StringIO()) as output:
-             self.assertFalse(HBNBCommand().onecmd("help all"))
-             # Adjust the expected string to match the indentation of the actual output
-             expected_output = h.replace('\n', '\n        ')
-             self.assertEqual(expected_output, output.getvalue().strip())
+        )
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("help all"))
+            # Adjust the expected string to match the indentation of the actual output
+            expected_output = h.replace('\n', '\n        ')
+            self.assertEqual(expected_output, output.getvalue().strip())
 
 
 class TestHBNBCommand_exit(unittest.TestCase):
