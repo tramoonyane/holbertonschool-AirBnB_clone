@@ -100,7 +100,8 @@ class TestHBNBCommand_help(unittest.TestCase):
             # Adjust the expected string to match the indentation of the actual output
             lines = h.split('\n')
             expected_output = '\n'.join("        " + line.lstrip() for line in lines)
-            self.assertEqual(expected_output, output.getvalue().strip())
+            for expected, actual in zip(expected_lines, actual_lines):
+                self.assertEqual(expected_output, output.getvalue().strip())
 
 
 class TestHBNBCommand_exit(unittest.TestCase):
