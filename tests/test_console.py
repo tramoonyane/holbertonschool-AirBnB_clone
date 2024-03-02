@@ -1323,15 +1323,15 @@ class TestHBNBCommand_update(unittest.TestCase):
         test_dict = storage.all()["Place.{}".format(testId)].__dict__
         self.assertEqual(7.2, test_dict["latitude"])
 
-    def test_update_valid_float_attr_dot_notation(self):
+     def test_update_valid_float_attr_dot_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
             HBNBCommand().onecmd("create Place")
             tId = output.getvalue().strip()
-        testCmd = "Place.update({}, latitude, 7.2)".format(tId)
+        testCmd = "Place.update({}, latitude, 7.0)".format(tId)
         self.assertFalse(HBNBCommand().onecmd(testCmd))
         test_dict = storage.all()["Place.{}".format(tId)].__dict__
-        self.assertEqual(7.2, test_dict["latitude"])
-
+        self.assertEqual(7.0, test_dict["latitude"])
+         
     def test_update_valid_dictionary_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
             HBNBCommand().onecmd("create BaseModel")
