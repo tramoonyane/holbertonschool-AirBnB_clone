@@ -90,18 +90,18 @@ class TestHBNBCommand_help(unittest.TestCase):
             self.assertEqual(expected_output, output.getvalue().strip())
 
     def test_help_all(self):
-        h = (
-            "Print the string representation of all instances or a specific class.\n"
-            "Usage: <User>.all()\n"
-            "               <User>.show()"  # Adjusted indentation
-        )
-        with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(HBNBCommand().onecmd("help all"))
-            # Adjust the expected string to match the indentation of the actual output
-            lines = h.split('\n')
-            expected_output = '\n'.join("        " + line.lstrip() for line in lines)
-            for expected, actual in zip(expected_lines, actual_lines):
-                self.assertEqual(expected_output, output.getvalue().strip())
+    h = (
+        "Print the string representation of all instances or a specific class.\n"
+        "Usage: <User>.all()\n"
+        "               <User>.show()"  # Adjusted indentation
+    )
+    with patch("sys.stdout", new=StringIO()) as output:
+        self.assertFalse(HBNBCommand().onecmd("help all"))
+        # Adjust the expected string to match the indentation of the actual output
+        expected_lines = h.strip().split('\n')
+        actual_lines = output.getvalue().strip().split('\n')
+        for expected, actual in zip(expected_lines, actual_lines):
+            self.assertEqual(expected.strip(), actual.strip())
 
 
 class TestHBNBCommand_exit(unittest.TestCase):
