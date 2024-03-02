@@ -1512,6 +1512,35 @@ def test_count_invalid_class(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("MyModel.count()"))
             self.assertEqual("0", output.getvalue().strip())
+class TestHBNBCommand_Count(unittest.TestCase):
+    ''' Test count method of HBNB comand interpreter '''
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage._FileStorage__objects = {}
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_count_invalid_class(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd(
+                    "MyModel.count()"))
+            self.assertEqual(
+                    "** class doesn't exist **",
+                    output.getvalue().strip())
 
     def test_count_object(self):
         with patch("sys.stdout", new=StringIO()) as output:
@@ -1549,7 +1578,6 @@ def test_count_invalid_class(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("Review.count()"))
             self.assertEqual("1", output.getvalue().strip())
-
 
 if __name__ == "__main__":
     unittest.main()
