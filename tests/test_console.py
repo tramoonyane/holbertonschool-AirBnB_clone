@@ -58,7 +58,8 @@ class TestHBNBCommand_help(unittest.TestCase):
 
     def test_help_create(self):
         h = (
-            "Create a new instance of BaseModel and save it to the JSON file.\n"
+            "Create a new instance of BaseModel"
+            "and save it to the JSON file.\n"
             "Usage: create <class_name>"
         )
         with patch("sys.stdout", new=StringIO()) as output:
@@ -69,7 +70,8 @@ class TestHBNBCommand_help(unittest.TestCase):
 
     def test_help_show(self):
         h = (
-            "Show the string representation of an instance.\n"
+            "Show the string representation"
+            "of an instance.\n"
             "Usage: show <class_name> <id>"
         )
         with patch("sys.stdout", new=StringIO()) as output:
@@ -80,7 +82,8 @@ class TestHBNBCommand_help(unittest.TestCase):
 
     def test_help_destroy(self):
         h = (
-            "Delete an instance based on the class name and id.\n"
+            "Delete an instance based"
+            "on the class name and id.\n"
             "Usage: destroy <class_name> <id>"
         )
         with patch("sys.stdout", new=StringIO()) as output:
@@ -91,8 +94,10 @@ class TestHBNBCommand_help(unittest.TestCase):
 
     def test_help_update(self):
         h = (
-            "Update an instance by adding or updating an attribute.\n"
-            "Usage: update <class_name> <id> <attribute_name> \"<attribute_value>\""
+            "Update an instance by"
+            "adding or updating an attribute.\n"
+            "Usage: update <class_name> <id>"
+            "<attribute_name> \"<attribute_value>\""
         )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
