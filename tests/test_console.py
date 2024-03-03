@@ -103,6 +103,12 @@ class TestHBNBCommand_help(unittest.TestCase):
             # Adjust the expected string to match
             # the indentation of the actual output
             expected_output = h.replace('\n', '\n        ')
+            # Update the expected message to reflect the new help message
+            expected_output = expected_output.replace(
+                'Update an instance by adding or updating an attribute.',
+                'Update an instance by adding or updating an attribute.\n'
+                'Usage: update <class_name> <id> <attribute_name> "<attribute_value>"'
+            )
             self.assertEqual(expected_output, output.getvalue().strip())
 
 
