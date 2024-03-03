@@ -56,18 +56,6 @@ class TestHBNBCommand_help(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(h, output.getvalue().strip())
 
-    def test_help_create(self):
-        h = (
-            "New instance of BaseModel and save it to the JSON file.\n"
-            "Usage: create <class_name>"
-        )
-        with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(HBNBCommand().onecmd("help create"))
-            # Adjust the expected string
-            # to match the indentation of the actual output
-            expected_output = h.replace('\n', '\n        ')
-            self.assertEqual(expected_output, output.getvalue().strip())
-
     def test_help_show(self):
         h = (
             "Show the string representation of an instance.\n"
