@@ -90,7 +90,8 @@ class TestHBNBCommand_help(unittest.TestCase):
         )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help destroy"))
-            # Adjust the expected string to match the indentation of the actual output
+            # Adjust the expected string to match
+            # the indentation of the actual output
             expected_output = h.replace('\n', '\n        ')
             self.assertEqual(expected_output, output.getvalue().strip())
 
@@ -103,7 +104,8 @@ class TestHBNBCommand_help(unittest.TestCase):
         )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
-            # Adjust the expected string to match the indentation of the actual output
+            # Adjust the expected string to match
+            # the indentation of the actual output
             expected_output = h.replace('\n', '\n        ')
             self.assertEqual(expected_output, output.getvalue().strip())
 
