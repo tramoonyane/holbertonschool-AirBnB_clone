@@ -58,7 +58,7 @@ class TestHBNBCommand_help(unittest.TestCase):
 
     def test_help_create(self):
         h = (
-            "Create a new instance of BaseModel and save it to the JSON file.\n"
+            "New instance of BaseModel and save it to the JSON file.\n"
             "Usage: create <class_name>"
         )
         with patch("sys.stdout", new=StringIO()) as output:
