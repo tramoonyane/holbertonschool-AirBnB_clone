@@ -100,11 +100,11 @@ class TestHBNBCommand_help(unittest.TestCase):
             expected_output = h.replace('\n', '\n        ')
             self.assertEqual(expected_output, output.getvalue().strip())
 
-    def test_help_all(self, mock_print):
-        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-            self.hbnb_command.do_all("User")
-            output = mock_stdout.getvalue().strip()
-        self.assertTrue("** class doesn't exist **" in output)
+    def test_help_all(self, mock_stdout):
+        h = "Prints the string representation of all instances or a specific class."
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("help all"))
+            self.assertEqual(h, output.getvalue().strip())
 
 
 class TestHBNBCommand_exit(unittest.TestCase):
