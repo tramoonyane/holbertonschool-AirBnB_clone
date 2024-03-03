@@ -95,7 +95,7 @@ class TestHBNBCommand_help(unittest.TestCase):
     def test_help_update(self):
         h = (
             "Update an instance by adding or updating an attribute.\n"
-            "Usage: update <class_name> <id> <attribute_name> \"<attribute_value>\"" # noqa
+            "Usage: update <class_name> <id> <attribute_name> \"<attribute_value>\""  # noqa
         )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
